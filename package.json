@@ -1,0 +1,12 @@
+{
+  "description": "",
+  "devDependencies": {
+    "@types/node": "^24.8.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.4",
+    "pg": "^8.16.3"
+  }
+}
