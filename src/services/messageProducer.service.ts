@@ -1,14 +1,20 @@
 import { prisma } from '../prismaClient.js';
 import { CreateMessageDTO } from '../dtos/message.dto.js';
-import { kafka } from '../kafka/kafkaClient.js';
+import { producer } from '../kafka/kafkaClient.js';
 
-export class MessageService {
-  async create(data: CreateMessageDTO) {
-    console.log('messageService  create called')
-    return prisma.message.create({ data });
+
+export class MessageProducerService {
+
+  async handleMessage(data: CreateMessageDTO): Promise<void> {
+
+    await producer.send({
+      topic: 'chat_messages',
+      messages: [
+        { key: String(data.userId), value: JSON.stringify(data) },
+      ]
+    });
+    console.log(`Sent message to kafka key ${data.userId}`);
   }
 
-  async findAll() {
-    return prisma.message.findMany();
-  }
+
 }

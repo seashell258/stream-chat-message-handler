@@ -155,9 +155,9 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  Room: 'Room',
-  Message: 'Message',
-  GiftMessage: 'GiftMessage'
+  room: 'room',
+  message: 'message',
+  giftMessage: 'giftMessage'
 };
 
 /**

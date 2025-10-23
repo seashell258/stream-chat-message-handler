@@ -15,21 +15,10 @@ __decorate([
     __metadata("design:type", Number)
 ], CreateMessageDTO.prototype, "userId", void 0);
 __decorate([
-    IsOptional(),
     IsInt(),
     __metadata("design:type", Number)
-], CreateMessageDTO.prototype, "receiverId", void 0);
+], CreateMessageDTO.prototype, "roomId", void 0);
 __decorate([
     IsString(),
     __metadata("design:type", String)
 ], CreateMessageDTO.prototype, "content", void 0);
-__decorate([
-    IsOptional(),
-    IsString(),
-    __metadata("design:type", String)
-], CreateMessageDTO.prototype, "type", void 0);
-__decorate([
-    IsOptional(),
-    IsInt(),
-    __metadata("design:type", Number)
-], CreateMessageDTO.prototype, "roomId", void 0);

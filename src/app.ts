@@ -4,14 +4,31 @@ import messageRoutes from './routes/message.routes.js'; //import啥隨便選
 // 這邊命名的東西就能refer to 那個 router
 //import giftRoutes from './routes/gift.routes';
 import { errorHandler } from './middlewares/error.middleware.js';
+import { connectKafkaProducer,shutdownKafkaProducer } from './kafka/kafkaClient.js';
+
+
+
 console.log('App.ts loaded');
 
 const app = express();
 app.use(express.json());
 
-//app.use('/messages', messageRoutes);
+app.use('/messages', messageRoutes);
 //app.use('/gifts', giftRoutes);
 
-//app.use(errorHandler);
+app.use(errorHandler);
+
+async function bootstrap() {
+  await connectKafkaProducer();
+
+  const server = app.listen(3000, () => console.log('Server running'));
+
+  process.on('SIGINT', async () => { //ctrl + c 前會先中斷 kafka 連線
+    await shutdownKafkaProducer();
+    server.close();
+  });
+}
+
+bootstrap().catch(console.error);
 
 export default app;

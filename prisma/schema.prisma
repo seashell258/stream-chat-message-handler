@@ -14,29 +14,29 @@ datasource db {
   url =  env("DATABASE_URL")
 }
 
-model Room {
+model room {
   id        Int       @id @default(autoincrement())
   name      String
   createdAt DateTime  @default(now())
-  messages  Message[]       // 關聯到 Message
-  giftMessages GiftMessage[] // 關聯到 GiftMessage
+  messages  message[]       // 關聯到 Message
+  giftMessages giftMessage[] // 關聯到 GiftMessage
 }
 
-model Message {
+model message {
   id        Int      @id @default(autoincrement())
   userId    Int
   roomId    Int
   content   String
   createdAt DateTime @default(now())
-  room      Room     @relation(fields: [roomId], references: [id])
+  room      room     @relation(fields: [roomId], references: [id])
 }
 
-model GiftMessage {
+model giftMessage {
   id        Int      @id @default(autoincrement())
   userId    Int
   roomId    Int
   content   String
   giftType  String
   createdAt DateTime @default(now())
-  room      Room     @relation(fields: [roomId], references: [id])
+  room      room     @relation(fields: [roomId], references: [id])
 }

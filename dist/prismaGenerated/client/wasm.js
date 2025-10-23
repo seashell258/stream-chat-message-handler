@@ -127,9 +127,9 @@ exports.Prisma.QueryMode = {
 
 
 exports.Prisma.ModelName = {
-  Room: 'Room',
-  Message: 'Message',
-  GiftMessage: 'GiftMessage'
+  room: 'room',
+  message: 'message',
+  giftMessage: 'giftMessage'
 };
 /**
  * Create the Client
@@ -160,7 +160,7 @@ const config = {
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
-    "rootEnvPath": "../../../.env",
+    "rootEnvPath": null,
     "schemaEnvPath": "../../../.env"
   },
   "relativePath": "../../../prisma",
@@ -179,13 +179,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/prismaGenerated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Room {\n  id           Int           @id @default(autoincrement())\n  name         String\n  createdAt    DateTime      @default(now())\n  messages     Message[] // 關聯到 Message\n  giftMessages GiftMessage[] // 關聯到 GiftMessage\n}\n\nmodel Message {\n  id        Int      @id @default(autoincrement())\n  userId    Int\n  roomId    Int\n  content   String\n  createdAt DateTime @default(now())\n  room      Room     @relation(fields: [roomId], references: [id])\n}\n\nmodel GiftMessage {\n  id        Int      @id @default(autoincrement())\n  userId    Int\n  roomId    Int\n  content   String\n  giftType  String\n  createdAt DateTime @default(now())\n  room      Room     @relation(fields: [roomId], references: [id])\n}\n",
-  "inlineSchemaHash": "c38f4513001fc07a5c5c1db8baf1d8bfda3ef9a331c51b94962d938bbfa85288",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/prismaGenerated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel room {\n  id           Int           @id @default(autoincrement())\n  name         String\n  createdAt    DateTime      @default(now())\n  messages     message[] // 關聯到 Message\n  giftMessages giftMessage[] // 關聯到 GiftMessage\n}\n\nmodel message {\n  id        Int      @id @default(autoincrement())\n  userId    Int\n  roomId    Int\n  content   String\n  createdAt DateTime @default(now())\n  room      room     @relation(fields: [roomId], references: [id])\n}\n\nmodel giftMessage {\n  id        Int      @id @default(autoincrement())\n  userId    Int\n  roomId    Int\n  content   String\n  giftType  String\n  createdAt DateTime @default(now())\n  room      room     @relation(fields: [roomId], references: [id])\n}\n",
+  "inlineSchemaHash": "d467e6e2cb0428f985810bffeef7dfef0cb3a479078c6eeff636389c54198cd7",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Room\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"messages\",\"kind\":\"object\",\"type\":\"Message\",\"relationName\":\"MessageToRoom\"},{\"name\":\"giftMessages\",\"kind\":\"object\",\"type\":\"GiftMessage\",\"relationName\":\"GiftMessageToRoom\"}],\"dbName\":null},\"Message\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"roomId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"room\",\"kind\":\"object\",\"type\":\"Room\",\"relationName\":\"MessageToRoom\"}],\"dbName\":null},\"GiftMessage\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"roomId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"giftType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"room\",\"kind\":\"object\",\"type\":\"Room\",\"relationName\":\"GiftMessageToRoom\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"room\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"messages\",\"kind\":\"object\",\"type\":\"message\",\"relationName\":\"messageToroom\"},{\"name\":\"giftMessages\",\"kind\":\"object\",\"type\":\"giftMessage\",\"relationName\":\"giftMessageToroom\"}],\"dbName\":null},\"message\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"roomId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"room\",\"kind\":\"object\",\"type\":\"room\",\"relationName\":\"messageToroom\"}],\"dbName\":null},\"giftMessage\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"roomId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"giftType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"room\",\"kind\":\"object\",\"type\":\"room\",\"relationName\":\"giftMessageToroom\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
