@@ -170,7 +170,6 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
@@ -179,8 +178,8 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/prismaGenerated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel room {\n  id           Int           @id @default(autoincrement())\n  name         String\n  createdAt    DateTime      @default(now())\n  messages     message[] // 關聯到 Message\n  giftMessages giftMessage[] // 關聯到 GiftMessage\n}\n\nmodel message {\n  id        Int      @id @default(autoincrement())\n  userId    Int\n  roomId    Int\n  content   String\n  createdAt DateTime @default(now())\n  room      room     @relation(fields: [roomId], references: [id])\n}\n\nmodel giftMessage {\n  id        Int      @id @default(autoincrement())\n  userId    Int\n  roomId    Int\n  content   String\n  giftType  String\n  createdAt DateTime @default(now())\n  room      room     @relation(fields: [roomId], references: [id])\n}\n",
-  "inlineSchemaHash": "d467e6e2cb0428f985810bffeef7dfef0cb3a479078c6eeff636389c54198cd7",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../src/prismaGenerated/client\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel room {\n  id           Int           @id @default(autoincrement())\n  name         String\n  createdAt    DateTime      @default(now())\n  messages     message[] // 關聯到 Message  非必填\n  giftMessages giftMessage[] // 關聯到 GiftMessage 非必填\n}\n\nmodel message {\n  id        Int      @id @default(autoincrement())\n  userId    Int\n  roomId    Int\n  content   String\n  createdAt DateTime @default(now())\n  room      room     @relation(fields: [roomId], references: [id])\n}\n\nmodel giftMessage {\n  id        Int      @id @default(autoincrement())\n  userId    Int\n  roomId    Int\n  content   String\n  giftType  String\n  createdAt DateTime @default(now())\n  room      room     @relation(fields: [roomId], references: [id])\n}\n",
+  "inlineSchemaHash": "93cbc612f28c1ead8a31bd1b570582d141dca4136403ab0a237fbb586d38fbd9",
   "copyEngine": true
 }
 config.dirname = '/'

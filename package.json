@@ -1,13 +1,16 @@
 {
   "description": "",
   "scripts": {
-    "go": "node dist/server.js"
+    "go": "node dist/server.js",
+    "tsc": "rmdir /s /q dist && tsc",
+    "dev": "ts-node --files src/server.ts"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^24.8.1",
     "prisma": "^6.18.0",
     "ts-node": "^10.9.2",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.3"
   },
   "dependencies": {

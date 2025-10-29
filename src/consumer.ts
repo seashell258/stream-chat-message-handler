@@ -1,4 +1,4 @@
-
+/*
 import { Kafka } from 'kafkajs';
 import type { Consumer } from 'kafkajs';
 
@@ -23,3 +23,4 @@ async function run():Promise<void> {
 }
 
 run();
+*/

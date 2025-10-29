@@ -1,4 +1,4 @@
-import { Kafka } from 'kafkajs';
+/* import { Kafka } from 'kafkajs';
 import type {Producer} from 'kafkajs';
 
 const kafka = new Kafka({
@@ -27,3 +27,4 @@ const run = async (): Promise<void> => {
 run().catch((err: unknown) => {
   console.error(err);
 });
+*/

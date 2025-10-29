@@ -18,8 +18,8 @@ model room {
   id           Int           @id @default(autoincrement())
   name         String
   createdAt    DateTime      @default(now())
-  messages     message[] // 關聯到 Message
-  giftMessages giftMessage[] // 關聯到 GiftMessage
+  messages     message[] // 關聯到 Message  非必填
+  giftMessages giftMessage[] // 關聯到 GiftMessage 非必填
 }
 
 model message {

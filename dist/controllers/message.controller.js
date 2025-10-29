@@ -1,13 +1,19 @@
-import { MessageService } from '../services/messageProducer.service.js';
-const service = new MessageService();
-export class MessageController {
-    async create(req, res) {
-        console.log('controller create called');
-        const message = await service.create(req.body);
-        res.json({ success: true, data: message });
-    }
-    async list(req, res) {
-        const messages = await service.findAll();
-        res.json({ success: true, data: messages });
+// message.controller.ts
+import { MessageProducerService } from '../services/messageProducer.service.js';
+import { producer } from '../kafka/kafkaClient.js';
+const service = new MessageProducerService();
+export class MessageProducerController {
+    async handleMessageController(req, res) {
+        console.log('controller create calledeeeeeeeeee');
+        try {
+            console.log('before handle');
+            const result = await service.handleMessage(req.body);
+            console.log('12313111111111111111111111', result);
+            res.json(result);
+        }
+        catch (error) {
+            console.log('12313111111111111111111111', error);
+            res.json({ success: false, data: 'unknow error, check error in log' });
+        }
     }
 }

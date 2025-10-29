@@ -8,17 +8,18 @@ services:
       KAFKA_NODE_ID: "1"
 
       KAFKA_PROCESS_ROLES: "broker,controller"
-      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@kafka_broker1:9093"
+      KAFKA_CONTROLLER_QUORUM_VOTERS: "1@127.0.0.1:9093"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: "1"
 
       KAFKA_LISTENERS: "INTERNAL://0.0.0.0:9092,EXTERNAL://0.0.0.0:9094,CONTROLLER://0.0.0.0:9093"
-      KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka_broker1:9092,EXTERNAL://localhost:9094"
+      KAFKA_ADVERTISED_LISTENERS: "INTERNAL://kafka_broker1:9092,EXTERNAL://127.0.0.1:9094"
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: "INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,CONTROLLER:PLAINTEXT"
       KAFKA_INTER_BROKER_LISTENER_NAME: "INTERNAL"
       KAFKA_CONTROLLER_LISTENER_NAMES: "CONTROLLER"
 
-      KAFKA_LOG_DIRS: "/tmp/kraft-combined-logs"
+      KAFKA_LOG_DIRS: "/var/lib/kafka/data"
 
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
     volumes:
       - kafka_kraft:/var/lib/kafka/data
 
@@ -36,6 +37,9 @@ services:
     ports:
       - "5432:5432"
 
+    volumes:
+      - postgres:/var/lib/postgresql/data
+
   kafkat-ui:
     image: provectuslabs/kafka-ui:latest
     environment:
@@ -46,3 +50,4 @@ services:
   
 volumes:
   kafka_kraft:
+  postgres:
