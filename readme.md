@@ -1,7 +1,13 @@
+![producer-side-framework](image.png)
+
+![consumer-side-framework](image-1.png)
+_______________
+
+text-version:
 Client (message request)
       │
       ▼
-app.ts
+   app.ts
       │
       ▼
 Message Routes
@@ -35,4 +41,4 @@ Consumer 得自己在 Service 層或專門的 validator function 做 DTO 驗證�
 可用 class-validator / Zod / Joi 等工具
       │
       ▼
-Consumer Service 處理業務邏輯
+Consumer Service 。 處理業務邏輯 ( 合併數筆資料一起進入postgres )
